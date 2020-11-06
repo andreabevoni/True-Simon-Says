@@ -1,0 +1,83 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* contenitore del simon says */
+.simon {
+  margin: 50px auto;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+/* regole generali anelli interni */
+.ring {
+  width: 50%;
+  height: 50%;
+  filter: brightness(50%);
+}
+
+/* regole per i quattro angoli colorati */
+.ring.green {
+  background-color: green;
+  border-radius: 100% 0 0 0;
+  border: solid black;
+  border-width: 10px 5px 5px 10px;
+}
+
+.ring.red {
+  background-color: red;
+  border-radius: 0 100% 0 0;
+  border: solid black;
+  border-width: 10px 10px 5px 5px;
+}
+
+.ring.yellow {
+  background-color: yellow;
+  border-radius: 0 0 0 100%;
+  border: solid black;
+  border-width: 5px 5px 10px 10px;
+}
+
+.ring.blue {
+  background-color: blue;
+  border-radius: 0 0 100% 0;
+  border: solid black;
+  border-width: 5px 10px 10px 5px;
+}
+
+/* regole per il centro del simon says con il punteggio */
+.ring.center {
+  background-color: black;
+  filter: brightness(100%);
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  /* pointer-events: none; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#score {
+  font-size: 40px;
+  color: white;
+}
+
+/* classe per accentere gli angoli del simon says */
+.ring.active {
+  filter: brightness(200%);
+}
+
+/* pulsante per debug */
+#start {
+  margin: 0 200px;
+  padding: 20px;
+}

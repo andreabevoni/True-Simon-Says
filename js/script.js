@@ -9,30 +9,38 @@ $(document).ready(function () {
 
   // il primo round comincia comincia quando viene premuto il pulsante
   document.getElementById('start').addEventListener('click', round);
+
   // quando un utente clicca un settore faccio i controlli
-  $(".ring.click").click(function() {
-    var index = $(this).index() + 1;
-    // controllo se il settore cliccato corrisponde al settore illuminato, altrimenti il gioco termina
-    if (index === arraySimon[arrayUser.length]) {
-      arrayUser.push(index);
-    } else {
-      error = true;
-      console.log("GAMEOVER");
-    }
-    // se l'utente ha azzeccato tutte le combinazioni, aumento il punteggio di 1 e procedo al round successivo
-    if ((arrayUser.length === arraySimon.length) && (error === false)) {
-      score++;
-      if (score < 10) {
-        document.getElementById("score").innerHTML = "00" + score;
-      } else if (score < 100) {
-        document.getElementById("score").innerHTML = "0" + score;
+  $(".ring").click(function() {
+    // la funzione parte solamente se il settore cliccato ha la classe click, che viene assegnata nei momenti di gioco in cui l'utente puó interagire
+    // (se non metto questo if ma do direttamente $(".click") come selettore per l'evento il codice non funziona)
+    if ($(".ring").hasClass("click")) {
+      var index = $(this).index() + 1;
+      // controllo se il settore cliccato corrisponde al settore illuminato
+      if (index === arraySimon[arrayUser.length]) {
+        arrayUser.push(index);
       } else {
-        document.getElementById("score").innerHTML = score;
+        error = true;
       }
-      round();
+      // se l'utente ha azzeccato tutte le combinazioni, aumento il punteggio di 1 e procedo al round successivo
+      if (arrayUser.length === arraySimon.length) {
+        score++;
+        if (score < 10) {
+          document.getElementById("score").innerHTML = "000" + score;
+        } else if (score < 100) {
+          document.getElementById("score").innerHTML = "00" + score;
+        } else if (score < 1000) {
+          document.getElementById("score").innerHTML = "0" + score;
+        } else {
+          document.getElementById("score").innerHTML = score;
+        }
+        round();
+        // in alternativa se l'utente ha sbagliato la combinazione, il gioco finisce
+      } else if (error === true) {
+        gameover();
+      }
     }
   });
-
 
   // FUNZIONI
 
@@ -44,6 +52,11 @@ $(document).ready(function () {
     $(".ring").each(function () {
       $(this).removeClass("click");
     });
+    // se é il primo round nascondo il pulsante di start e mostro il punteggio
+    if (arraySimon.length === 0) {
+      $("#start").toggleClass("flex");
+      $("#score").toggleClass("flex");
+    }
     // creo un numero random fra 0 e 3 e lo inserisco nell'array
     arraySimon.push(Math.floor(Math.random()*4) + 1);
     // utilizzo un countdown per mostrare le mosse da fare ad intervalli regolari
@@ -72,19 +85,18 @@ $(document).ready(function () {
 
   // funzione che gestisce il gameover
   function gameover() {
-
+    // tolgo all'utente la possibilitá di cliccare sui lati del Simon Says
+    $(".ring").each(function () {
+      $(this).removeClass("click");
+    });
+    // nascondo il punteggio e mostro il pulsante di start, in modo che l'utente possa ricominciare da capo
+    $("#start").toggleClass("flex");
+    $("#score").toggleClass("flex");
+    // resetto le variabili e le scritte
+    arraySimon = [];
+    arrayUser = [];
+    error = false;
+    score = 0;
+    document.getElementById("score").innerHTML = "0000"
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 });

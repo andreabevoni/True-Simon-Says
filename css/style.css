@@ -2,13 +2,14 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Syne Mono', monospace;
 }
 
 /* contenitore del simon says */
 .simon {
   margin: 50px auto;
-  width: 400px;
-  height: 400px;
+  width: 800px;
+  height: 800px;
   display: flex;
   flex-wrap: wrap;
   position: relative;
@@ -61,16 +62,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  display: flex;
+  display: none;
   justify-content: space-around;
   align-items: center;
-  font-size: 40px;
+  padding: 0 50px;
+  font-size: 100px;
   color: white;
 }
 
-#score {
-  font-size: 40px;
-  color: white;
+/* regole per il punteggio */
+.flex {
+  display: flex;
 }
 
 /* classe per accentere gli angoli del simon says */
@@ -79,16 +81,11 @@
 }
 
 /* classe per poter cliccare gli angoli del simon says */
-.ring.click {
+.click,
+#start {
   cursor: pointer;
 }
 
-.ring.click:active {
+.click:active {
   filter: brightness(200%);
-}
-
-/* pulsante per debug */
-#start {
-  margin: 0 200px;
-  padding: 20px;
 }

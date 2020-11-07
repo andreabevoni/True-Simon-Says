@@ -7,8 +7,8 @@
 /* contenitore del simon says */
 .simon {
   margin: 50px auto;
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   display: flex;
   flex-wrap: wrap;
   position: relative;
@@ -51,19 +51,21 @@
 }
 
 /* regole per il centro del simon says con il punteggio */
-.ring.center {
+.center {
+  width: 50%;
+  height: 50%;
   background-color: black;
-  filter: brightness(100%);
   border-radius: 100%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  /* pointer-events: none; */
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  font-size: 40px;
+  color: white;
 }
 
 #score {
@@ -73,6 +75,15 @@
 
 /* classe per accentere gli angoli del simon says */
 .ring.active {
+  filter: brightness(200%);
+}
+
+/* classe per poter cliccare gli angoli del simon says */
+.ring.click {
+  cursor: pointer;
+}
+
+.ring.click:active {
   filter: brightness(200%);
 }
 

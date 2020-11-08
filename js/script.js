@@ -57,7 +57,7 @@ $(document).ready(function () {
       $("#start").toggleClass("flex");
       $("#score").toggleClass("flex");
     }
-    // creo un numero random fra 0 e 3 e lo inserisco nell'array
+    // creo un numero random fra 1 e 4 e lo inserisco nell'array
     arraySimon.push(Math.floor(Math.random()*4) + 1);
     // utilizzo un countdown per mostrare le mosse da fare ad intervalli regolari
     var i = 0;
